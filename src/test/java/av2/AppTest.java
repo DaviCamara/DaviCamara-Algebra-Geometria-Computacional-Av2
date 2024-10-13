@@ -1,4 +1,4 @@
-package practice;
+package av2;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
