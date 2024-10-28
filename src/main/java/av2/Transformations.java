@@ -35,11 +35,11 @@ public class Transformations {
             throw new IllegalArgumentException("Para transformações de duas dimensões o vetor precisa ter 2 elementos");
         }
         //elementos x e y
-        int x = vector.get(0);
-        int y = vector.get(1);
+        double x = vector.get(0);
+        double y = vector.get(1);
 
         //Elementos transladados
-        int[] translatedElements = new int[2];
+        double[] translatedElements = new double[2];
         translatedElements[0] = x + coordenadaX;
         translatedElements[1] = y + coordenadaY;
 
@@ -52,12 +52,12 @@ public class Transformations {
             throw new IllegalArgumentException("Para transformações de três dimensões o vetor precisa ter 3 elementos");
         }
         //elementos x e y
-        int x = vector.get(0);
-        int y = vector.get(1);
-        int z = vector.get(2);
+        double x = vector.get(0);
+        double y = vector.get(1);
+        double z = vector.get(2);
 
         //Elementos transladados
-        int[] translatedElements = new int[3];
+        double[] translatedElements = new double[3];
         translatedElements[0] = x + coordenadaX;
         translatedElements[1] = y + coordenadaY;
         translatedElements[2] = z + coordenadaZ;
@@ -75,16 +75,16 @@ public class Transformations {
 
         double radianos = Math.toRadians(angulo);
 
-        int x = vector.get(0);
-        int y = vector.get(1);
+        double x = vector.get(0);
+        double y = vector.get(1);
 
         double xRotacionado = x * Math.cos(radianos) - y * Math.sin(radianos);
         double yRotacionado = x * Math.sin(radianos) + y * Math.cos(radianos);
 
-        int[] elementosRotacionados = new int[2];
+        double[] elementosRotacionados = new double[2];
 
-        elementosRotacionados[0] = (int) Math.round(xRotacionado);
-        elementosRotacionados[1] = (int) Math.round(yRotacionado);
+        elementosRotacionados[0] = Math.round(xRotacionado);
+        elementosRotacionados[1] = Math.round(yRotacionado);
 
         return new Vector(2, elementosRotacionados);
     }
@@ -95,19 +95,19 @@ public class Transformations {
         }
         double radianos = Math.toRadians(angulo);
 
-        int x = vector.get(0);
-        int y = vector.get(1);
-        int z = vector.get(2);
+        double x = vector.get(0);
+        double y = vector.get(1);
+        double z = vector.get(2);
 
-        int xRotacionado = x;
+        double xRotacionado = x;
         double yRotacionado = y * Math.cos(radianos) - z * Math.sin(radianos);
         double zRotacionado = y * Math.sin(radianos) + z * Math.cos(radianos);
 
-        int[] elementosRotacionados = new int[3];
+        double[] elementosRotacionados = new double[3];
 
         elementosRotacionados[0] = xRotacionado;
-        elementosRotacionados[1] = (int) Math.round(yRotacionado);
-        elementosRotacionados[2] = (int) Math.round(zRotacionado);
+        elementosRotacionados[1] = Math.round(yRotacionado);
+        elementosRotacionados[2] = Math.round(zRotacionado);
 
         return new Vector(3, elementosRotacionados);
 
@@ -119,19 +119,19 @@ public class Transformations {
         }
         double radianos = Math.toRadians(angulo);
 
-        int x = vetor.get(0);
-        int y = vetor.get(1);
-        int z = vetor.get(2);
+        double x = vetor.get(0);
+        double y = vetor.get(1);
+        double z = vetor.get(2);
 
         double xRotacionado = x * Math.cos(radianos) + z * Math.sin(radianos);
-        int yRotacionado = y;
+        double yRotacionado = y;
         double zRotacionado = -x * Math.sin(radianos) + z * Math.cos(radianos);
 
-        int[] elementosRotacionados = new int[3];
+        double[] elementosRotacionados = new double[3];
 
-        elementosRotacionados[0] = (int) Math.round(xRotacionado);
+        elementosRotacionados[0] = Math.round(xRotacionado);
         elementosRotacionados[1] = yRotacionado;
-        elementosRotacionados[2] = (int) Math.round(zRotacionado);
+        elementosRotacionados[2] = Math.round(zRotacionado);
 
         return new Vector(3, elementosRotacionados);
     }
@@ -142,23 +142,144 @@ public class Transformations {
         }
         double radianos = Math.toRadians(angulo);
 
-        int x = vetor.get(0);
-        int y = vetor.get(1);
-        int z = vetor.get(2);
+        double x = vetor.get(0);
+        double y = vetor.get(1);
+        double z = vetor.get(2);
 
         double xRotacionado = x * Math.cos(radianos) - y * Math.sin(radianos);
         double yRotacionado = x * Math.sin(radianos) + y * Math.cos(radianos);
-        int zRotacionado = z;
+        double zRotacionado = z;
 
-        int[] elementosRotacionados = new int[3];
+        double[] elementosRotacionados = new double[3];
 
-        elementosRotacionados[0] = (int) Math.round(xRotacionado);
-        elementosRotacionados[1] = (int) Math.round(yRotacionado);
+        elementosRotacionados[0] = Math.round(xRotacionado);
+        elementosRotacionados[1] = Math.round(yRotacionado);
         elementosRotacionados[2] = zRotacionado;
 
         return new Vector(3, elementosRotacionados);
     }
 
+    public static Vector reflection2DX(Vector vetor) {
+        if (vetor.getDimension() != 2) {
+            throw new IllegalArgumentException("O vetor precisa ter 2 elementos para que a reflexão seja realizada.");
+        }
 
+        // Get the current coordinates
+        double x = vetor.get(0);
+        double y = vetor.get(1);
 
+        double[] reflectedElements = {x, -y};
+
+        return new Vector(2, reflectedElements);
+    }
+
+    public static Vector reflection2DY(Vector vetor) {
+        if (vetor.getDimension() != 2) {
+            throw new IllegalArgumentException("O vetor precisa ter 2 elementos para que a reflexão seja realizada.");
+        }
+
+        double x = vetor.get(0);
+        double y = vetor.get(1);
+
+        double[] reflectedElements = {-x, y};
+
+        return new Vector(2, reflectedElements);
+    }
+
+    public static Vector reflection3DX(Vector vetor) {
+        if (vetor.getDimension() != 3) {
+            throw new IllegalArgumentException("O vetor precisa ter 3 elementos para que uma reflaxão em tridimensional.");
+        }
+
+        double x = vetor.get(0);
+        double y = vetor.get(1);
+        double z = vetor.get(2);
+
+        double[] reflectedElements = {x, -y, -z};
+
+        return new Vector(3, reflectedElements);
+    }
+
+    public static Vector reflection3DY(Vector vetor) {
+        if (vetor.getDimension() != 3) {
+            throw new IllegalArgumentException("O vetor precisa ter 3 elementos para que uma reflaxão em tridimensional.");
+        }
+        double x = vetor.get(0);
+        double y = vetor.get(1);
+        double z = vetor.get(2);
+
+        double[] reflectedElements = {-x, y, -z};
+
+        return new Vector(3, reflectedElements);
+    }
+
+    public static Vector reflection3DZ(Vector vetor) {
+        if (vetor.getDimension() != 3) {
+            throw new IllegalArgumentException("O vetor precisa ter 3 elementos para que uma reflaxão em tridimensional.");
+        }
+
+        double x = vetor.get(0);
+        double y = vetor.get(1);
+        double z = vetor.get(2);
+
+        double[] reflectedElements = {-x, -y, z};
+
+        return new Vector(3, reflectedElements);
+    }
+
+    public static Vector projection2DX(Vector vetor) {
+        if (vetor.getDimension() != 2) {
+            throw new IllegalArgumentException("O vetor precisa ter 2 elementos para que uma projeção em 2 dimensões.");
+        }
+
+        double x = vetor.get(0);
+        return new Vector(2, new double[]{x, 0});
+    }
+
+    public static Vector projection2DY(Vector vetor) {
+        if (vetor.getDimension() != 2) {
+            throw new IllegalArgumentException("O vetor precisa ter 2 elementos para que uma projeção em 2 dimensões.");
+        }
+        double y = vetor.get(1);
+        return new Vector(2, new double[]{0, y});
+    }
+
+    public static Vector projection3DX(Vector vetor) {
+        if (vetor.getDimension() != 3) {
+            throw new IllegalArgumentException("O vetor precisa ter 3 elementos para que uma projeção  tridimensional.");
+        }
+        double x = vetor.get(0);
+        return new Vector(3, new double[]{x, 0, 0});
+    }
+
+    public static Vector projection3DY(Vector vetor) {
+        if (vetor.getDimension() != 3) {
+            throw new IllegalArgumentException("O vetor precisa ter 3 elementos para que uma projeção  tridimensional.");
+        }
+        double y = vetor.get(1);
+        return new Vector(3, new double[]{0, y, 0});
+    }
+
+    public static Vector projection3DZ(Vector vetor) {
+        if (vetor.getDimension() != 3) {
+            throw new IllegalArgumentException("O vetor precisa ter 3 elementos para que uma projeção  tridimensional.");
+        }
+        double z = vetor.get(2);
+        return new Vector(3, new double[]{0, 0, z});
+    }
+
+    public static Vector shearing(Vector vetor, double kx, double ky) {
+        if (vetor.getDimension() != 2) {
+            throw new IllegalArgumentException("O vetor precisa ter 2 elementos.");
+        }
+
+        double x = vetor.get(0);
+        double y = vetor.get(1);
+
+        double newX = x + kx * y;
+        double newY = y + ky * x;
+
+        double[] shearedElements = {newX, newY};
+        return new Vector(2, shearedElements);
+    }
 }

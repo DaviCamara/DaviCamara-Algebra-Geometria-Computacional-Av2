@@ -2,11 +2,11 @@ package av2;
 
 public class Vector {
 
-    private int vector[];
+    private double vector[];
     private int dimension;
 
-    public Vector(int dim, int[] elements) {
-        vector = new int[dim];
+    public Vector(int dim, double[] elements) {
+        vector = new double[dim];
         this.dimension = dim;
 
         for (int i = 0; i < dim; i++) {
@@ -15,12 +15,12 @@ public class Vector {
         }
     }
 
-    public int get(int index) {
+    public double get(int index) {
 
         return vector[index];
     }
 
-    public void set(int index, int element) {
+    public void set(int index, double element) {
 
         vector[index] = element;
 
